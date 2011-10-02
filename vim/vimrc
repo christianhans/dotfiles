@@ -1,0 +1,213 @@
+call pathogen#infect()
+
+cd ~/Desktop
+
+set nocompatible
+
+" Nice menus
+aunmenu Help.
+aunmenu Window.
+"let no_buffers_menu=1
+set mousemodel=popup
+
+" Enable Syntax Colors
+syntax on
+set background=dark
+colorscheme solarized
+
+if has("gui_running")
+  set lines=35 columns=100
+  set guifont=Consolas:h13
+  set fuoptions=maxvert,maxhorz
+else
+  colorscheme myterm
+endif
+
+" The PC is fast enough, do syntax highlight syncing from start
+autocmd BufEnter * :syntax sync fromstart
+
+set directory=.,$TEMP
+
+" Remember cursor position
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+
+" Enable hidden buffers
+set hidden
+
+filetype on
+filetype plugin on
+
+set autochdir
+
+" swap files
+set backupdir=~/.vim/tmp
+set directory=~/.vim/tmp
+
+" activate a permanent ruler and disable Toolbar, and add line
+" highlightng as well as numbers.
+" And disable the sucking pydoc preview window for the omni completion
+" also highlight current line and disable the blinking cursor.
+if has("gui_running")
+  set guioptions-=T
+  set completeopt-=preview
+  set gcr=a:blinkon0
+  set ruler
+  set cursorline
+endif
+set ttyfast
+
+" customize the wildmenu
+set wildmenu
+set wildignore=*.dll,*.o,*.pyc,*.bak,*.exe,*.jpg,*.jpeg,*.png,*.gif,*$py.class,*.class
+set wildmode=list:full
+
+" minibufexplorer
+"let g:miniBufExplMapWindowNavVim = 1 
+"let g:miniBufExplMapWindowNavArrows = 1 
+"let g:miniBufExplMapCTabSwitchBufs = 1 
+"let g:miniBufExplModSelTarget = 1
+
+" go with smartindent if there is no plugin indent file.
+" but don't outdent hashes
+set smartindent
+inoremap # X#
+
+" quicker window switching
+" nnoremap <D-Left> <C-w>h
+" nnoremap <D-Down> <C-w>j
+" nnoremap <D-Up> <C-w>k
+" nnoremap <D-Right> <C-w>l
+
+set gdefault
+
+" NERDTree mappings
+nnoremap <silent> <D-e> :NERDTreeToggle <cr>
+inoremap <silent> <D-e> <Esc>:NERDTreeToggle <cr>
+
+" gundo
+nnoremap <silent> <D-r> :GundoToggle<CR>
+
+" command-t
+map <silent> <D-d> :CommandT<CR>
+
+" background toggle
+call togglebg#map("<D-u>")
+
+" Run cmd with F4 (windows)
+"nnoremap <silent> <F4> :!start cmd<CR>
+
+" Remove trailing whitespace on CTRL-Q
+nnoremap <C-q> :%s/\s\+$//<cr>:let @/=''<CR>
+
+" hide matches on CTRL-H
+nnoremap <C-h> :nohlsearch<cr>
+
+" Make the command line two lines high and change the statusline display to
+" something that looks useful.
+if has("gui_running")
+  set cmdheight=1
+  set laststatus=2
+  set statusline=[%l,%v\ %P%M]\ %f\ %r%h%w\ (%{&ff})\ %{fugitive#statusline()}
+  set showcmd
+  set number
+endif
+
+" Tab Settings
+set smarttab
+set tabstop=4
+
+" NERDTree
+let NERDTreeIgnore=['\~$', '\.pyc$', '\.pyo$', '\.class$', 'pip-log\.txt$', '\.o$']
+let NERDTreeShowBookmarks=1
+" hide left scrollbar
+set guioptions-=L
+
+" tagbar
+let g:tagbar_usearrows = 1
+nnoremap <D-k> :TagbarToggle<CR>
+let g:tagbar_ctags_bin = '/usr/local/bin/ctags' 
+
+set scrolloff=3
+
+" Better Search
+set hlsearch
+set incsearch
+
+" utf-8 default encoding
+set enc=utf-8
+
+" prefer unix over windows over os9 formats
+set fileformats=unix,dos,mac
+
+" sets leader to ',' and localleader to "\"
+let mapleader=","
+let maplocalleader="\\"
+
+set paste
+
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+
+" <Ctrl><Space> for Autocomplete
+if has("gui")
+  inoremap <C-Space> <C-n>
+endif
+
+" python support
+autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4 colorcolumn=79
+\ formatoptions+=croq softtabstop=4 smartindent
+\ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+let python_highlight_all=1
+let python_highlight_exceptions=0
+let python_highlight_builtins=0
+autocmd FileType pyrex setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+
+" ruby support
+autocmd FileType ruby setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4 colorcolumn=79
+
+" go support
+autocmd BufNewFile,BufRead *.go setlocal ft=go
+autocmd FileType go setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+
+" php support
+autocmd FileType php setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
+
+" GLSL
+autocmd bufnewfile,bufread *.frag,*.fragment,*.vert,*.vertex,*.shader,*.glsl setlocal ft=glsl
+autocmd FileType glsl setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+
+" Verilog
+autocmd FileType verilog setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+
+" CSS
+autocmd FileType css setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+
+" Java
+autocmd FileType java setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
+
+" rst
+autocmd BufNewFile,BufRead *.txt setlocal ft=rst
+autocmd FileType rst setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+\ formatoptions+=nqt textwidth=74
+
+" C#
+autocmd FileType cs setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+
+" C/Obj-C/C++
+autocmd FileType c setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab colorcolumn=79
+autocmd FileType cpp setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab colorcolumn=79
+autocmd FileType objc setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab colorcolumn=79
+
+" vim
+autocmd FileType vim setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+
+" Javascript
+autocmd FileType javascript setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4 colorcolumn=79
+let javascript_enable_domhtmlcss=1
+
+" D
+autocmd FileType d setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+
+" cmake support
+autocmd BufNewFile,BufRead CMakeLists.txt setlocal ft=cmake
