@@ -1,0 +1,6 @@
+These are some of my dotfiles. Feel free to copy and modify them.
+
+The dotfiles have only been tested on Mac OS X Lion, but might
+also work on other operating systems with a few modifications.
+
+For zsh I use oh-my-zsh (https://github.com/robbyrussell/oh-my-zsh).
