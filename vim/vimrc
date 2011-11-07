@@ -80,9 +80,11 @@ inoremap # X#
 
 set gdefault
 
-" NERDTree mappings
+" NERDTree
 nnoremap <silent> <D-e> :NERDTreeToggle <cr>
 inoremap <silent> <D-e> <Esc>:NERDTreeToggle <cr>
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
 
 " gundo
 nnoremap <silent> <D-r> :GundoToggle<CR>
