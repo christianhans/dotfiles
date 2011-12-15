@@ -4,6 +4,7 @@ alias grep="grep --color=auto"
 alias serve='python -m SimpleHTTPServer 8000'
 alias pjson="python -m json.tool | pygmentize -l javascript"
 alias pingall="ping 224.0.0.1"
+alias mtex="latexmk -pvc -pdf"
 
 # Environment variables
 export PAGER=less

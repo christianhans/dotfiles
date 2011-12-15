@@ -27,4 +27,4 @@ source $ZSH/oh-my-zsh.sh
 source ~/.zsh_profile
 
 # Customize to your needs...
-export PATH="/usr/local/share/python:/usr/local/Cellar/ruby/1.9.2-p290/bin:/usr/local/bin:/usr/local/sbin:${PATH}"
+export PATH="/usr/local/share/python:/usr/local/Cellar/ruby/1.9.3-p0/bin:/usr/local/bin:/usr/local/sbin:${PATH}"

@@ -13,6 +13,7 @@ set mousemodel=popup
 " Enable Syntax Colors
 syntax on
 set background=dark
+let g:solarized_menu=0
 colorscheme solarized
 
 if has("gui_running")
@@ -55,6 +56,13 @@ if has("gui_running")
   set cursorline
 endif
 set ttyfast
+
+" spell check
+nnoremap <silent> <D-0> :setlocal spell! spell?<cr>
+
+" always turn on spell check for *.tex and *.tex files
+au SessionLoadPost,BufNewFile,BufRead *.txt setlocal spell
+au SessionLoadPost,BufNewFile,BufRead *.tex setlocal spell
 
 " customize the wildmenu
 set wildmenu
