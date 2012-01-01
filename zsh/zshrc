@@ -25,12 +25,3 @@ plugins=(osx git svn brew pip autojump history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 source ~/.zsh_profile
-
-# Customize to your needs...
-export PATH="/usr/local/share/python:/usr/local/Cellar/ruby/1.9.3-p0/bin:/usr/local/bin:/usr/local/sbin:${PATH}"
-export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
-
-# Use vimpager as pager
-export PAGER=/usr/local/bin/vimpager
-alias less=$PAGER
-alias zless=$PAGER

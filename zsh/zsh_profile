@@ -5,3 +5,12 @@ alias serve='python -m SimpleHTTPServer 8000'
 alias pjson="python -m json.tool | pygmentize -l javascript"
 alias pingall="ping 224.0.0.1"
 alias mtex="latexmk -pvc -pdf"
+
+# Use vimpager as pager
+export PAGER=/usr/local/bin/vimpager
+alias less=$PAGER
+alias zless=$PAGER
+
+# Environment variables 
+export PATH="/usr/local/share/python:/usr/local/Cellar/ruby/1.9.3-p0/bin:/usr/local/bin:/usr/local/sbin:${PATH}"
+export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
