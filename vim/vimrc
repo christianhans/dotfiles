@@ -221,3 +221,6 @@ autocmd FileType d setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
 
 " cmake support
 autocmd BufNewFile,BufRead CMakeLists.txt setlocal ft=cmake
+
+" Tex
+autocmd FileType tex setlocal lbr
