@@ -5,3 +5,5 @@ also work on other operating systems with a few modifications.
 
 For zsh I use oh-my-zsh (https://github.com/robbyrussell/oh-my-zsh)
 and vimpager (http://www.vim.org/scripts/script.php?script_id=1723).
+
+My vimrc requires Vundle (https://github.com/gmarik/vundle).
