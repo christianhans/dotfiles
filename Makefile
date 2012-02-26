@@ -2,7 +2,6 @@ install: install-vim install-zsh
  
 install-vim:
 	ln -s `pwd`/vim/vimrc ~/.vimrc
-	ln -s `pwd`/vim/update_bundles.sh ~/.vim/update_bundles.sh
 
 install-zsh:
 	ln -s `pwd`/zsh/zshrc ~/.zshrc
