@@ -129,10 +129,10 @@ set wildignore=*.dll,*.o,*.pyc,*.bak,*.exe,*.jpg,*.jpeg,*.png,*.gif,*$py.class,*
 set wildmode=list:full
 
 " quicker window switching
-" nnoremap <D-Left> <C-w>h
-" nnoremap <D-Down> <C-w>j
-" nnoremap <D-Up> <C-w>k
-" nnoremap <D-Right> <C-w>l
+nnoremap <A-Left> <C-w>h
+nnoremap <A-Down> <C-w>j
+nnoremap <A-Up> <C-w>k
+nnoremap <A-Right> <C-w>l
 
 " gundo
 nnoremap <silent> <D-r> :GundoToggle<CR>

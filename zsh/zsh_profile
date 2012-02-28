@@ -12,6 +12,6 @@ alias less=$PAGER
 alias zless=$PAGER
 
 # Environment variables 
-export PATH="/usr/local/share/python:/usr/local/Cellar/ruby/1.9.3-p0/bin:/usr/local/pear/bin:/usr/local/bin:/usr/local/sbin:${PATH}"
+export PATH="/usr/local/share/python:/usr/local/Cellar/ruby/1.9.3-p125/bin:/usr/local/pear/bin:/usr/local/bin:/usr/local/sbin:${PATH}"
 export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
 export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
