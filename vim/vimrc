@@ -9,7 +9,6 @@ Bundle 'gmarik/vundle'
 Bundle 'Raimondi/delimitMate'
 Bundle 'sjl/gundo.vim'
 Bundle 'scrooloose/nerdtree'
-Bundle 'kevinw/pyflakes-vim'
 Bundle 'msanders/snipmate.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'tomtom/tcomment_vim'
@@ -19,6 +18,9 @@ Bundle 'edsono/vim-matchit'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'vim-scripts/Rename2'
+Bundle 'scrooloose/syntastic'
+Bundle 'skammer/vim-css-color'
+Bundle 'tpope/vim-endwise'
 Bundle 'git://git.wincent.com/command-t.git'
 
 " General settings
@@ -27,6 +29,9 @@ filetype plugin indent on
 syntax on
 
 cd ~/Desktop
+
+let mapleader=" "
+let maplocalleader=" "
 
 set shortmess=at        " shorten error messages
 
@@ -40,17 +45,14 @@ set equalalways         " make splits equal size
 
 set lazyredraw          " don't redraw while executing macros
 
-let mapleader=','
-let maplocalleader=','
-
 set smarttab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 
 set smartindent
-inoremap # X#         " don't outdent hashes
-
+" don't outdent hashes
+inoremap # X#
 set hlsearch            " better search
 set incsearch
 set ignorecase
@@ -61,7 +63,7 @@ set scrolloff=5
 set sidescroll=5
 
 set linebreak
-set showbreak=↳\ 
+set showbreak=↳\
 
 set paste
 
@@ -93,7 +95,7 @@ if has('gui_running')
   set number
   set ruler
   set cursorline
-  set lines=35 columns=100
+  set lines=36 columns=100
   set guifont=Consolas:h13
   set fuoptions=maxvert,maxhorz
 endif
@@ -104,10 +106,47 @@ if has('gui_running')
   set cmdheight=1
   set laststatus=2
 "  set noshowmode
-  set statusline=\ %f%m%r%h%w
-  set statusline+=%=%{fugitive#statusline()} 
-  set statusline+=\ %([%{&ff}\|%{(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\")}%k\|%Y]%)
-  set statusline+=\ %([%l/%L]\ %)
+  set statusline=
+  set statusline+=[%n]\                         " buffer number
+  set statusline+=%t                            " file name
+  set statusline+=%h%m%r%w\                     " flags
+  set statusline+=%{SyntasticStatuslineFlag()}  " syntastic
+  set statusline+=%=                            " right align
+  set statusline+=%{fugitive#statusline()}      " fugitive
+  set statusline+=\ [%{strlen(&ft)?&ft:'none'}, " filetype
+  set statusline+=%{strlen(&fenc)?&fenc:&enc},  " encoding
+  set statusline+=%{&fileformat}]               " file format
+  set statusline+=\ %l\/%L                      " offset
+endif
+
+" Key bindings
+nnoremap <silent> <Space>s :sp<CR>                 " Open a new split
+nnoremap <silent> <Space>q :q<CR>                  " Close
+
+nnoremap <Space>h <C-W>h                           " Move around between splits
+nnoremap <Space>l <C-W>l
+nnoremap <Space>j <C-W>j
+nnoremap <Space>k <C-W>k
+
+nnoremap <Space>m :bn<CR>                          " Cycle through buffers
+nnoremap <Space>n :bp<CR>
+
+nnoremap <silent> <Space>f :nohlsearch<CR>         " Hide search
+
+nnoremap <Space>ß :%s/\s\+$//<cr>:let @/=''<CR>    " Remove trailing whitespace
+nnoremap <Space>p :set nowrap!<CR>                 " Toggle wrapping
+nnoremap <Space>0 :setlocal spell! spell?<CR>      " Toggle spell check
+
+nnoremap <silent> <Space>e :NERDTreeTabsToggle<CR> " Toggle NERDTree
+nnoremap <silent> <Space>r :GundoToggle<CR>        " Toggle Gundo
+nnoremap <silent> <Space>d :CommandT<CR>           " Toogle CommandT
+nnoremap <silent> <Space>i :TagbarToggle<CR>       " Toggle Tagbar
+
+call togglebg#map('<Space>u')                      " background toggle
+
+" <Ctrl><Space> for Autocomplete
+if has('gui_running')
+  inoremap <C-Space> <C-n>
 endif
 
 " The PC is fast enough, do syntax highlight syncing from start
@@ -115,9 +154,6 @@ autocmd BufEnter * :syntax sync fromstart
 
 " Remember cursor position
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-
-" spell check
-nnoremap <silent> <D-0> :setlocal spell! spell?<cr>
 
 " always turn on spell check for *.tex and *.tex files
 au SessionLoadPost,BufNewFile,BufRead *.txt setlocal spell
@@ -128,31 +164,7 @@ set wildmenu
 set wildignore=*.dll,*.o,*.pyc,*.bak,*.exe,*.jpg,*.jpeg,*.png,*.gif,*$py.class,*.class
 set wildmode=list:full
 
-" quicker window switching
-nnoremap <A-Left> <C-w>h
-nnoremap <A-Down> <C-w>j
-nnoremap <A-Up> <C-w>k
-nnoremap <A-Right> <C-w>l
-
-" gundo
-nnoremap <silent> <D-r> :GundoToggle<CR>
-
-" background toggle
-call togglebg#map('<D-u>')
-
-" wrapping toggle
-map <D-ß> :set nowrap! <CR>
-
-" Remove trailing whitespace on CTRL-Q
-nnoremap <C-q> :%s/\s\+$//<cr>:let @/=''<CR>
-
-" hide matches on CTRL-H
-nnoremap <C-h> :nohlsearch<cr>
-
 " NERDTree
-"nnoremap <silent> <D-e> :NERDTreeToggle <cr>
-"inoremap <silent> <D-e> <Esc>:NERDTreeToggle <cr>
-map <D-e> <plug>NERDTreeTabsToggle<CR>
 let g:nerdtree_tabs_open_on_gui_startup = 0
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
@@ -160,21 +172,16 @@ let NERDTreeIgnore=['\~$', '\.pyc$', '\.pyo$', '\.class$', 'pip-log\.txt$', '\.o
 let NERDTreeShowBookmarks=1
 set guioptions-=L " hide left scrollbar
 
-" command-t
-map <silent> <D-d> :CommandT<CR>
-
 " tagbar
 let g:tagbar_usearrows = 1
-nnoremap <D-k> :TagbarToggle<CR>
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 
-" <Ctrl><Space> for Autocomplete
-if has('gui_running')
-  inoremap <C-Space> <C-n>
-endif   
+" Syntastic
+let g:syntastic_enable_signs=0
 
-" enable better matching
-ru macros/matchit.vim
+" reselect visual block after indent
+vnoremap < <gv
+vnoremap > >gv
 
 " python support
 autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4 colorcolumn=79
