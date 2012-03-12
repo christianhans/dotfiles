@@ -20,7 +20,6 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'vim-scripts/Rename2'
 Bundle 'scrooloose/syntastic'
 Bundle 'skammer/vim-css-color'
-Bundle 'tpope/vim-endwise'
 Bundle 'git://git.wincent.com/command-t.git'
 
 " General settings
