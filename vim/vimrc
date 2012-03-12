@@ -50,8 +50,6 @@ set softtabstop=4
 set shiftwidth=4
 
 set smartindent
-" don't outdent hashes
-inoremap # X#
 set hlsearch            " better search
 set incsearch
 set ignorecase
@@ -140,8 +138,15 @@ nnoremap <silent> <Space>e :NERDTreeTabsToggle<CR> " Toggle NERDTree
 nnoremap <silent> <Space>r :GundoToggle<CR>        " Toggle Gundo
 nnoremap <silent> <Space>d :CommandT<CR>           " Toogle CommandT
 nnoremap <silent> <Space>i :TagbarToggle<CR>       " Toggle Tagbar
-
-call togglebg#map('<Space>u')                      " background toggle
+ 
+" Key mapping for toggling background color
+function! s:TogBG()
+    let &background = ( &background == "dark"? "light" : "dark" )
+    if exists("g:colors_name")
+        exe "colorscheme " . g:colors_name
+    endif
+endfunction
+nnoremap <silent> <Space>u :call <SID>TogBG()<CR>
 
 " <Ctrl><Space> for Autocomplete
 if has('gui_running')
