@@ -127,8 +127,8 @@ nnoremap <Space>l <C-W>l
 nnoremap <Space>j <C-W>j
 nnoremap <Space>k <C-W>k
 
-nnoremap <Space>m :bn<CR>                          " Cycle through buffers
-nnoremap <Space>n :bp<CR>
+nnoremap <silent> <Space>m :bn<CR>                 " Cycle through buffers
+nnoremap <silent> <Space>n :bp<CR>
 
 nnoremap <silent> <Space>f :nohlsearch<CR>         " Hide search
 
