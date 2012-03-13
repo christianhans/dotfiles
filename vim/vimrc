@@ -117,7 +117,8 @@ if has('gui_running')
 endif
 
 " Key bindings
-nnoremap <silent> <Space>s :sp<CR>                 " Open a new split
+nnoremap <silent> <Space>s :split<CR>              " Horizontal split
+nnoremap <silent> <Space>x :vsplit<CR>             " Vertical split
 nnoremap <silent> <Space>q :q<CR>                  " Close
 
 nnoremap <Space>h <C-W>h                           " Move around between splits
@@ -138,7 +139,7 @@ nnoremap <silent> <Space>e :NERDTreeTabsToggle<CR> " Toggle NERDTree
 nnoremap <silent> <Space>r :GundoToggle<CR>        " Toggle Gundo
 nnoremap <silent> <Space>d :CommandT<CR>           " Toogle CommandT
 nnoremap <silent> <Space>i :TagbarToggle<CR>       " Toggle Tagbar
- 
+
 " Key mapping for toggling background color
 function! s:TogBG()
     let &background = ( &background == "dark"? "light" : "dark" )
