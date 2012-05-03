@@ -15,10 +15,14 @@ function virtualenv_info {
     [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
 }
 
-PROMPT='%{$fg[green]%}%B%n%b%{$reset_color%}@%{$fg[green]%}$(box_name)%{$reset_color%} %{$fg_bold[blue]%}${PWD/#$HOME/~}%{$reset_color%}$(git_prompt_info)$(virtualenv_info) '
+if [ $UID -eq 0 ]; then NCOLOR="red"; else NCOLOR="green"; fi
+local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 
-local return_status="%{$fg[red]%}%(?..⏎)%{$reset_color%}"
-RPROMPT='${return_status}%{$reset_color%}'
+PROMPT='%{$fg[$NCOLOR]%}%B%n%b%{$reset_color%}@%{$fg[green]%}$(box_name)%{$reset_color%} %{$fg_bold[blue]%}${PWD/#$HOME/~}%{$reset_color%}$(git_prompt_info)$(virtualenv_info) '
+
+PROMPT2='%{$fg[red]%}\ %{$reset_color%}'
+
+RPS1='${return_code}'
 
 ZSH_THEME_GIT_PROMPT_PREFIX=" %{$fg[red]%}("
 ZSH_THEME_GIT_PROMPT_SUFFIX=")%{$reset_color%}"
