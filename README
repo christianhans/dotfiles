@@ -1,9 +1,11 @@
-These are some of my dotfiles. Feel free to copy and modify them.
+Some of my dotfiles - feel free to copy and modify them.
 
-The dotfiles have only been tested on Mac OS X Lion, but might
-also work on other operating systems with a few modifications.
+These dotfiles have been tested on OS X Mavericks, but might
+also work in other operating systems with a few modifications.
 
-For zsh I use oh-my-zsh (https://github.com/robbyrussell/oh-my-zsh)
-and vimpager (http://www.vim.org/scripts/script.php?script_id=1723).
+For zsh I use:
+    - oh-my-zsh: https://github.com/robbyrussell/oh-my-zsh
+    - and vimpager: http://www.vim.org/scripts/script.php?script_id=1723
 
-My vimrc requires Vundle (https://github.com/gmarik/vundle).
+My vimrc requires:
+    - vundle: https://github.com/gmarik/vundle
