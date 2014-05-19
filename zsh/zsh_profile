@@ -5,6 +5,10 @@ alias serve='python -m SimpleHTTPServer 8000'
 alias pjson="python -m json.tool | pygmentize -l javascript"
 alias pingall="ping 224.0.0.1"
 alias mtex="latexmk -pvc -pdf"
+alias c="pygmentize"
+alias is_unix_eol="egrep -L $'\r\n'" # LF terminated?
+alias is_dos_eol="egrep -l $'\r\n'" # CRLF terminated?
+alias fix_mail_db="sqlite3 ~/Library/Mail/V2/MailData/Envelope\ Index vacuum;"
 
 # Use vimpager as pager
 export PAGER=/usr/local/bin/vimpager
@@ -12,6 +16,15 @@ alias less=$PAGER
 alias zless=$PAGER
 
 # Environment variables 
-export PATH="/usr/local/share/python:/usr/local/Cellar/ruby/1.9.3-p194/bin:/usr/local/pear/bin:/usr/texbin:/usr/local/bin:/usr/local/sbin:${PATH}"
+export PATH="$(brew --prefix homebrew/php/php54)/bin:/usr/local/bin:/usr/local/sbin:/usr/texbin:/usr/local/opt/ruby/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/npm/bin"
 export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
 export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+export JAVA_HOME=/Library/Java/Home
+export EDITOR='mate -w'
+
+# Print statistics for commands running longer than 10 seconds
+REPORTTIME=10
+
+[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
+
+fpath=(/usr/local/share/zsh-completions $fpath)
