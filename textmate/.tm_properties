@@ -1,0 +1,25 @@
+PATH             = "$PATH:/usr/local/bin:/usr/texbin"
+TM_PYTHON        = "/usr/local/bin/python"
+TM_RUBY          = "/usr/local/bin/ruby"
+TM_HASKELL       = "/usr/local/bin/ghci"
+TM_GIT           = "/usr/local/bin/git"
+TM_SVN           = "/usr/local/bin/svn"
+excludeFiles     = "*.{so,pyc,o,scssc,aux}"
+#excludeDirectories = "build,dist,tmp,log"
+
+# show the path to the current tab's file in the window title 
+# (replace the 2 instances of 'username' in the string below 
+# with your mac username).
+windowTitle    = "$TM_DISPLAYNAME${TM_DIRECTORY/\A(?:\/Users\/chans\w+\/?(.*)|(.+))\z/${2:? – ${2/\A\/Users\/chans/~/}:${1/\A(?=.)/ – /}}/}"
+
+fontName       = "Menlo" 
+fontSize       = 14
+tabSize        = 4
+softTabs       = true
+#wrapColumn     = 80 | "Use Window Frame" # choose one
+#sofWrap        = false
+#showInvisibles = true
+
+[ *.{txt,md,mdown,markdown,tex} ]
+spellChecking  = true
+spellingLanguage = 'en'
